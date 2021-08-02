@@ -10,6 +10,7 @@ const MINA_UA =
 
 
 const API = {
+  USERPROFILE: 'https://userprofile.mina.mi.com/device_profile/conversation',
   USBS: 'https://api2.mina.mi.com/remote/ubus',
   SERVICE_AUTH: 'https://account.xiaomi.com/pass/serviceLoginAuth2',
   SERVICE_LOGIN: 'https://account.xiaomi.com/pass/serviceLogin',

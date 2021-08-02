@@ -47,7 +47,7 @@ class XiaoAi {
     }
   }
 
-  async exec (deviceId, method) {
+  async nlpResult (deviceId, limit) {
     const ss = await this.session
     const status = await this.checkStatus(deviceId)
     if (!status) {
@@ -56,14 +56,11 @@ class XiaoAi {
 
     deviceId = this.valDeviceId(deviceId)
 
-    return method({
+    return await nlpResult({
       cookie: ss.cookie,
-      deviceId: deviceId
+      deviceId: deviceId,
+      limit
     })
-  }
-
-  async nlpResult (deviceId) {
-    return await this.exec(deviceId, nlpResult)
   }
 
   valDeviceId (deviceId) {

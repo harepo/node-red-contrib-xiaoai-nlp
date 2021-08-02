@@ -22,25 +22,29 @@ function mibrain (operation, method, { cookie, deviceId }) {
   })
 }
 
-function nlpResult ({ cookie, deviceId }) {
-    // https://userprofile.mina.mi.com/device_profile/conversation?limit=10&requestId=app_ios_0j8KzdD0HQsHRAehXcqqPeF3nL3AHq
-  const param = {
-    limit: 10,
-    requestId: `app_ios_${randomString(30)}`,
-    timestamp: Date.now(),
-  }
-  const url = appendParam('https://userprofile.mina.mi.com/device_profile/conversation', querystring.stringify(param))
-  const Cookie =  cookie + `;deviceId=${deviceId}`;
-//   console.info('cookie', Cookie);
-  return request({
-    url,
-    method: 'GET',
-    headers: {
-      Cookie: Cookie,
-    }
-  }); 
-  // return mibrain({}, 'nlp_result_get', { cookie, deviceId })
+function mibrain2 (operation, { cookie, deviceId }) {
+  const param = {
+    ...operation,
+    requestId: 'app_ios_' + randomString(30),
+    timestamp: Date.now()
+  }
+  const url = appendParam(API.USERPROFILE, querystring.stringify(param))
+  const Cookie = cookie + `;deviceId=${deviceId}`
+
+  return request({
+    url,
+    method: 'GET',
+    headers: {
+      Cookie: Cookie
+    }
+  })
 }
 
+function nlpResult ({ cookie, deviceId, limit = 10 }) {
+  // https://userprofile.mina.mi.com/device_profile/conversation?limit=10&requestId=app_ios_0j8KzdD0HQsHRAehXcqqPeF3nL3AHq
+  return mibrain2({
+    limit
+  }, { cookie, deviceId })
+}
 
 module.exports = { nlpResult: nlpResult }

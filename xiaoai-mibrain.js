@@ -2,7 +2,7 @@ const Xiaoai = require('./lib/XiaoAi')
 const XiaoAiError = require('./xiaoai/XiaoAiError')
 module.exports = RED => {
   // nlp-result
-  RED.nodes.registerType('xiaoai-nlp-result_1_2', class {
+  RED.nodes.registerType('xiaoai-nlp-result_ex', class {
     constructor (config) {
       const node = this
       RED.nodes.createNode(node, config)
@@ -14,7 +14,7 @@ module.exports = RED => {
         data.payload = data.device || data.payload
 
         try {
-          const res = await xiaoai.nlpResule(data.device)
+          const res = await xiaoai.nlpResule(data.device, data.limit)
           data.res = res
           node.status({ text: `获取nlp结果成功:${data._msgid}` })
           node.send([data, null])

@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-xiaoai-nlp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "xiaoai nlp",
   "main": "index.js",
   "repository": {
@@ -15,8 +15,7 @@
   ],
   "node-red": {
     "nodes": {
-      "xiaoai-mibrain_1": "xiaoai-mibrain_1.js",
-      "xiaoai-tts-configurator_1": "xiaoai-tts-configurator_1.js"
+      "xiaoai-mibrain": "xiaoai-mibrain.js"
     }
   },
   "bugs": {
