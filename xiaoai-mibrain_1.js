@@ -2,7 +2,7 @@ const Xiaoai = require('./lib/XiaoAi')
 const XiaoAiError = require('./xiaoai/XiaoAiError')
 module.exports = RED => {
   // nlp-result
-  RED.nodes.registerType('xiaoai-nlp-result', class {
+  RED.nodes.registerType('xiaoai-nlp-result_1_2', class {
     constructor (config) {
       const node = this
       RED.nodes.createNode(node, config)
