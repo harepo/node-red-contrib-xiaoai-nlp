@@ -10,7 +10,6 @@ class XiaoAi {
 
       if (!userId || !serviceToken) throw new Error('参数不合法')
       this.session = login({ userId, serviceToken })
-      
     } else {
       if (!user || !pwd) throw new Error('参数不合法')
       this.session = login(user, pwd, sid)
@@ -30,21 +29,17 @@ class XiaoAi {
     return this.session.then(ss => device(ss.cookie))
   }
 
-  async checkStatus (deviceId) {
+  async checkStatus () {
     const ss = await this.session
 
-    if (deviceId) {
-      return Promise.resolve(true)
-    } else {
-      if (this.liveDevice && !this.liveDevice.length) {
-        this.liveDevice = await device(ss.cookie)
-      }
-
-      if (!this.liveDevice.length) {
-        return Promise.resolve(false)
-      }
-      return Promise.resolve(true)
+    if (this.liveDevice && !this.liveDevice.length) {
+      this.liveDevice = await device(ss.cookie)
     }
+
+    if (!this.liveDevice.length) {
+      return Promise.resolve(false)
+    }
+    return Promise.resolve(true)
   }
 
   async nlpResult (deviceId, limit) {
@@ -54,20 +49,25 @@ class XiaoAi {
       return Promise.resolve('无设备在线')
     }
 
-    deviceId = this.valDeviceId(deviceId)
+    const device = this.findDeviceById(deviceId)
+    if (!device) {
+      this.liveDevice = [] // 清空
+      return Promise.resolve('没有找到匹配的设备')
+    }
 
     return await nlpResult({
       cookie: ss.cookie,
       deviceId: deviceId,
+      hardware: device.hardware,
       limit
     })
   }
 
-  valDeviceId (deviceId) {
-    if (deviceId) {
-      return deviceId
+  findDeviceById (deviceId) {
+    if (!deviceId) {
+      return false
     }
-    return this.liveDevice[0].deviceID
+    return this.liveDevice.find(device => device.deviceID === deviceId)
   }
 }
 

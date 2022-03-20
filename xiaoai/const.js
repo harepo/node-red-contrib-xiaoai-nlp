@@ -2,15 +2,15 @@
 // mock app device id
 const APP_DEVICE_ID = '3C861A5820190429'
 const SDK_VER = '3.4.1'
-const APP_VER = '2.0.10'
+const APP_VER = '2.2.12'
 
-const APP_UA = 'APP/com.xiaomi.mico APPV/2.1.17 iosPassportSDK/3.4.1 iOS/13.3.1'
+const APP_UA = 'APP/com.xiaomi.mico APPV/2.2.12 iosPassportSDK/3.4.1 iOS/13.3.1'
 const MINA_UA =
   'MiHome/6.0.103 (com.xiaomi.mihome; build:6.0.103.1; iOS 14.4.0) Alamofire/6.0.103 MICO/iOSApp/appStore/6.0.103'
 
-
 const API = {
   USERPROFILE: 'https://userprofile.mina.mi.com/device_profile/conversation',
+  USERPROFILE_V2: 'https://userprofile.mina.mi.com/device_profile/v2/conversation',
   USBS: 'https://api2.mina.mi.com/remote/ubus',
   SERVICE_AUTH: 'https://account.xiaomi.com/pass/serviceLoginAuth2',
   SERVICE_LOGIN: 'https://account.xiaomi.com/pass/serviceLogin',
